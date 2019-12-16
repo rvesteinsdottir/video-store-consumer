@@ -1,12 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Customer from './Customer';
 
-const CustomerList = () => {
+const CustomerList = ({ customerList }) => {
+  const buildCustomers = () => {
+    const customerElements = customerList.map((customer) => {
+      return <Customer 
+        key={customer.id}
+        { ...customer }
+      />
+    });
+
+    return customerElements;
+  }
+
   return (
-    <h3>CustomerList</h3>
-
-
-
+    <div>
+      <h3>CustomerList</h3>
+      {buildCustomers()}
+    </div>
   )
 }
 
