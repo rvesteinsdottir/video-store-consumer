@@ -30,9 +30,8 @@ class App extends Component {
   componentDidMount() {
     axios.get(`${BASE_URL}/customers`)
     .then((response) => {
-      const customers = Object.keys(response.data).map((customer) => { 
-        return response.data[customer]
-      })
+
+      const customers = response.data;
 
       this.setState({ 
         customers,
@@ -40,8 +39,20 @@ class App extends Component {
       });
     })
     .catch((error) => {
-      this.setState({ error: error.message });
+      this.setState({
+        error: error.message 
+      });
     });
+  }
+
+  selectCustomer(id) {
+    const { customers } = this.state;
+
+    const selectedCustomer = customers[id - 1]
+
+    this.setState({
+      selectedCustomer,
+    })
   }
 
   render() {
@@ -71,7 +82,7 @@ class App extends Component {
               <Home />
             </Route>
             <Route path="/customers">
-              <CustomerList customerList={this.state.customers} />
+              <CustomerList customerList={this.state.customers} selectCustomer={(id) => this.selectCustomer(id)} />
             </Route>
             <Route path="/search">
               <MovieSearch />
