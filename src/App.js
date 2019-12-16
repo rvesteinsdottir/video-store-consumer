@@ -42,6 +42,28 @@ class App extends Component {
     .catch((error) => {
       this.setState({ error: error.message });
     });
+
+    axios.get(`${BASE_URL}/movies`)
+    .then((response) => {
+      const movies = response.data;
+      this.setState({ 
+        movies,
+        error: undefined
+      });
+    })
+    .catch((error) => {
+      this.setState({ error: error.message });
+    });
+  }
+
+  selectMovie = (movieId) => {
+    const { movies } = this.state;
+
+    const selectedMovie = movies.find((movie) => {
+      return movie.id === movieId;
+    })
+    
+    this.setState({ selectedMovie, })
   }
 
   render() {
@@ -50,6 +72,8 @@ class App extends Component {
         <div className="App">
           <nav>
             <ul>
+              {this.state.selectedMovie ? <li>Selected Movie:{this.state.selectedMovie.title}</li> : "" }
+              {this.state.selectedCustomer ? <li>Selected Customer:{this.state.selectedCustomer.name}</li> : "" }
               <li>
                 <Link to="/">Home</Link>
               </li>
@@ -64,6 +88,9 @@ class App extends Component {
               </li>
             </ul>
           </nav>
+          
+          
+         
         
         
           <Switch>
@@ -74,10 +101,10 @@ class App extends Component {
               <CustomerList customerList={this.state.customers} />
             </Route>
             <Route path="/search">
-              <MovieSearch />
+              <MovieSearch  />
             </Route>
             <Route path="/library">
-              <MovieLib />
+              <MovieLib movieList={this.state.movies} selectMovie={(id) => this.selectMovie(id)} />
             </Route>
           </Switch>
         </div>
