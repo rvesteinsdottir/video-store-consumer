@@ -9,6 +9,7 @@ const MovieLib = (props) => {
       key={i}
       { ...movie }
       selectMovie={(id) => props.selectMovie(id)}
+      inLibrary="true"
       />
   });
   

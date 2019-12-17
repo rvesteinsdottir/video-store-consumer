@@ -60,6 +60,7 @@ class MovieSearch extends Component {
     return <Movie
       key={i}
       { ...movie }
+      selectMovie={(id) => props.selectMovie(id)}
       />
   });
   
