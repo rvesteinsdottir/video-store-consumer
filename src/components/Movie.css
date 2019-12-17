@@ -1,0 +1,46 @@
+.movie-card {
+  margin: 10px;
+}
+
+.movie-card-body { 
+
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  grid-template-rows: auto auto auto;
+  justify-items: center;
+}
+
+.movie-card-image {
+  background-color: #2196F3;
+  width: 150px;
+  height: 200px;
+  grid-column-start: 1;
+  border: 1px solid black;
+  margin: 10px;
+
+}
+
+.movie-card-release-date {
+  grid-row-start: 3;
+  grid-column-start: 1;
+}
+
+.movie-card-title {
+  grid-row-start: 2;
+  grid-column-start: 1;
+}
+
+.movie-card-description {
+  grid-column-start: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  text-align: left;
+  margin: 10px;
+}
+
+.movie-card-button {
+  grid-row-start: 2;
+  grid-column-start: 2;
+  width: 200px;
+  text-align: center;
+}
