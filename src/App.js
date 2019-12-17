@@ -128,7 +128,7 @@ class App extends Component {
               {this.state.selectedMovie ? ("Selected Movie: \n" + this.state.selectedMovie.title) : "" }
               <br />
               {this.state.selectedCustomer ? ("Selected Customer: \n" + this.state.selectedCustomer.name) : "" }
-              {this.state.selectedMovie ? <Button onClick={() => this.createRental()}>Create a Rental</Button> : ''}
+              {(this.state.selectedMovie && this.state.selectedCustomer) ? <Button onClick={() => this.createRental()}>Create a Rental</Button> : ''}
             </div>
           </div>
           
