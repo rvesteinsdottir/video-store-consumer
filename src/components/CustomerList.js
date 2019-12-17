@@ -17,7 +17,7 @@ const CustomerList = ({ customerList, selectCustomer }) => {
 
   return (
     <div>
-      <h3>CustomerList</h3>
+      <h3>Customer List</h3>
       { buildCustomers() }
     </div>
   )
