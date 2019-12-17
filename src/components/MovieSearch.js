@@ -93,4 +93,9 @@ class MovieSearch extends Component {
   }
 }
 
+MovieSearch.propTypes = {
+  url: PropTypes.string.isRequired,
+  selectMovie: PropTypes.func.isRequired,
+}
+
 export default MovieSearch;

@@ -21,5 +21,10 @@ const MovieLib = (props) => {
   )
 }
 
+MovieLib.propTypes = {
+  movieList: PropTypes.array.isRequired,
+  selectMovie: PropTypes.func.isRequired,
+}
+
 export default MovieLib;
 

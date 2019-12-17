@@ -10,7 +10,7 @@ const Movie = (props) => {
       <div >
 
         <div className="movie-card-body">
-          <img src={props.image_url} className="movie-card-image"/>
+          <img src={props.image_url} className="movie-card-image" alt="movie cover"/>
           <div className="movie-card-title">  
             {props.title}
           </div>
@@ -27,6 +27,14 @@ const Movie = (props) => {
       </div>
     </Card>
   )
+}
+
+Movie.propTypes = {
+  title: PropTypes.string.isRequired,
+  release_date: PropTypes.string.isRequired,
+  overview: PropTypes.string.isRequired,
+  image_url: PropTypes.string,
+  id: PropTypes.number,
 }
 
 export default Movie;
