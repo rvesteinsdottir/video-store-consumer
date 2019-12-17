@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Button from 'react-bootstrap/Button';
+
 
 const Customer = ({ id, name, address, city, state, postalCode, registered_at, phone, account_credit, movies_checked_out_count, selectCustomer }) => {
   return (
@@ -13,12 +15,12 @@ const Customer = ({ id, name, address, city, state, postalCode, registered_at, p
         <li>Movies Checked Out: {movies_checked_out_count} </li>
       </ul>
 
-      <button
+      <Button
         type="button"
         className="select_customer"
         onClick={() => selectCustomer(id)}>
           Select
-      </button>
+      </Button>
     </div>
 
   )
