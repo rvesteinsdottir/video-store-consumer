@@ -85,6 +85,33 @@ class App extends Component {
     })
   }
 
+  createRental() {
+    if(this.state.selectedMovie) {
+      const movieTitle = this.state.selectedMovie.title
+      const customerId = this.state.selectedCustomer.id
+      let dueDate = new Date()
+      dueDate.setDate(new Date().getDate() + 1);
+
+      const params = {
+        customer_id: customerId,
+        due_date: dueDate.toISOString(), 
+      }
+
+      axios.post(`${BASE_URL}/rentals/${movieTitle}/check-out`, params)
+      .then(() => {
+
+        this.setState({
+          selectedMovie: undefined,
+          selectedCustomer: undefined,
+          error: undefined,
+        })
+      })
+      .catch((error) => {
+        this.setState({ error: error.message });
+      });
+    }
+  }
+
   render() {
     return (
       <Router>
@@ -93,6 +120,7 @@ class App extends Component {
             <ul>
               {this.state.selectedMovie ? <li>Selected Movie:{this.state.selectedMovie.title}</li> : "" }
               {this.state.selectedCustomer ? <li>Selected Customer:{this.state.selectedCustomer.name}</li> : "" }
+              {this.state.selectedMovie ? <li><button onClick={() => this.createRental()}>Create a Rental</button>  </li> : ''}
               <li>
                 <Link to="/">Home</Link>
               </li>
@@ -105,10 +133,11 @@ class App extends Component {
               <li>
                 <Link to="/library">Library</Link>
               </li>
+                
             </ul>
           </nav>
+          
 
-        
           <Switch>
             <Route exact path="/">
               <Home />
