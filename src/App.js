@@ -111,9 +111,6 @@ class App extends Component {
         <div className="App">
           <div className="sidenav">
             <ul>
-              {this.state.selectedMovie ? <li>Selected Movie:{this.state.selectedMovie.title}</li> : "" }
-              {this.state.selectedCustomer ? <li>Selected Customer:{this.state.selectedCustomer.name}</li> : "" }
-              {this.state.selectedMovie ? <li><Button onClick={() => this.createRental()}>Create a Rental</Button>  </li> : ''}
               <li>
                 <Link to="/">Home</Link>
               </li>
@@ -126,8 +123,13 @@ class App extends Component {
               <li>
                 <Link to="/library">Library</Link>
               </li>
-                
             </ul>
+            <div className="selected-item">
+              {this.state.selectedMovie ? ("Selected Movie: \n" + this.state.selectedMovie.title) : "" }
+              <br />
+              {this.state.selectedCustomer ? ("Selected Customer: \n" + this.state.selectedCustomer.name) : "" }
+              {this.state.selectedMovie ? <Button onClick={() => this.createRental()}>Create a Rental</Button> : ''}
+            </div>
           </div>
           
           <div className="main">

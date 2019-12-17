@@ -41,3 +41,8 @@
   margin-left: 160px;
   padding: 20px 10px;
 }
+
+.selected-item {
+  background-color: rgb(226, 177, 86);
+  padding: 20px;
+}

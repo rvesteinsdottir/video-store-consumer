@@ -16,7 +16,7 @@ const Customer = ({ id, name, address, city, state, postalCode, registered_at, p
         </div>
         <div className="customer-info">
           <ul> 
-            <li>Registration Date: {registered_at} </li>
+            <li>Registration Date: {(registered_at).substring(0,10)} </li>
             <li>Phone: {phone} </li>
             <li>Address: {address}, {city}, {state} {postalCode} </li>
           </ul>
@@ -32,7 +32,6 @@ const Customer = ({ id, name, address, city, state, postalCode, registered_at, p
         </div>  
       </div>
     </Card>
-
   )
 }
 
