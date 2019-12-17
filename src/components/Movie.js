@@ -20,7 +20,7 @@ const Movie = (props) => {
             
           </div>
           <div className="movie-card-button" >
-            <Button onClick={() => props.selectMovie(props.id)}>Select This Movie!</Button>
+            <Button onClick={() => props.selectMovie(props.id)}>{props.inLibrary ? "Select" : "Add to Rental Library"}</Button>
           </div>
 
         </div>

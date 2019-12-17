@@ -12,6 +12,7 @@ import MovieSearch from './components/MovieSearch';
 import MovieLib from './components/MovieLib';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 
 const BASE_URL = 'http://localhost:3000'
 
@@ -25,6 +26,8 @@ class App extends Component {
       customers: [],
       selectedCustomer: undefined,
       error: undefined,
+      alertText: undefined,
+      alertVariant: undefined,
     };
   } 
 
@@ -67,12 +70,18 @@ class App extends Component {
         movies.push(movieToAdd)
         this.setState({
           movies,
+          alertText: "Movie successfully added to your rental library",
+          alertVariant: "success"
         });
       })
       .catch((error) => {
-        this.setState({ error: error.message });
+        this.setState({ 
+          error: error.message,
+          alertText: `${error.message}`,
+          alertVariant: "danger" 
+        });
       });
-    } else { console.log('movie already included in db')}
+    } else { this.setState({alertText: "Movie already exists in library", alertVariant: "danger"})}
   }
 
   selectMovie = (movieId) => {
@@ -109,20 +118,38 @@ class App extends Component {
 
       axios.post(`${BASE_URL}/rentals/${movieTitle}/check-out`, params)
       .then(() => {
-
         this.setState({
           selectedMovie: undefined,
           selectedCustomer: undefined,
           error: undefined,
+          alertText: "Movie successfully rented",
+          alertVariant: "success"
         })
       })
       .catch((error) => {
-        this.setState({ error: error.message });
+        this.setState({ 
+          error: error.message,
+          alertText: `An error occurred: ${error.message}`,
+          alertVariant: "danger"
+        });
       });
     }
   }
 
   render() {
+
+    const videoAlert = () => {
+      return(
+        <Alert 
+          variant={this.state.alertVariant}
+          onClose={() => this.setState({alertText: undefined, alertVariant: undefined})} 
+          dismissible
+        > 
+          {this.state.alertText} 
+        </Alert>
+      )
+    }
+
     return (
       <Router>
         <div className="App">
@@ -150,6 +177,7 @@ class App extends Component {
           </div>
           
           <div className="main">
+            {this.state.alertText ? videoAlert() : "" }
             <Switch>
               <Route exact path="/">
                 <Home />
