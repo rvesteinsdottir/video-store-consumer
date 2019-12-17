@@ -11,6 +11,7 @@ import CustomerList from './components/CustomerList';
 import MovieSearch from './components/MovieSearch';
 import MovieLib from './components/MovieLib';
 import axios from 'axios';
+import Button from 'react-bootstrap/Button';
 
 const BASE_URL = 'http://localhost:3000'
 
@@ -125,11 +126,8 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <nav>
+          <div className="sidenav">
             <ul>
-              {this.state.selectedMovie ? <li>Selected Movie:{this.state.selectedMovie.title}</li> : "" }
-              {this.state.selectedCustomer ? <li>Selected Customer:{this.state.selectedCustomer.name}</li> : "" }
-              {this.state.selectedMovie ? <li><button onClick={() => this.createRental()}>Create a Rental</button>  </li> : ''}
               <li>
                 <Link to="/">Home</Link>
               </li>
@@ -142,25 +140,31 @@ class App extends Component {
               <li>
                 <Link to="/library">Library</Link>
               </li>
-                
             </ul>
-          </nav>
+            <div className="selected-item">
+              {this.state.selectedMovie ? ("Selected Movie: \n" + this.state.selectedMovie.title) : "" }
+              <br />
+              {this.state.selectedCustomer ? ("Selected Customer: \n" + this.state.selectedCustomer.name) : "" }
+              {this.state.selectedMovie ? <Button onClick={() => this.createRental()}>Create a Rental</Button> : ''}
+            </div>
+          </div>
           
-
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route path="/customers">
-              <CustomerList customerList={this.state.customers} selectCustomer={(id) => this.selectCustomer(id)} />
-            </Route>
-            <Route path="/search">
-              <MovieSearch url={BASE_URL} selectMovie={(movie) => this.addMovie(movie)}  />
-            </Route>
-            <Route path="/library">
-              <MovieLib movieList={this.state.movies} selectMovie={(externalId) => this.selectMovie(externalId)} />
-            </Route>
-          </Switch>
+          <div className="main">
+            <Switch>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route path="/customers">
+                <CustomerList customerList={this.state.customers} selectCustomer={(id) => this.selectCustomer(id)} />
+              </Route>
+              <Route path="/search">
+                <MovieSearch url={BASE_URL} selectMovie={(movie) => this.addMovie(movie)} />
+              </Route>
+              <Route path="/library">
+                <MovieLib movieList={this.state.movies} selectMovie={(id) => this.selectMovie(id)} />
+              </Route>
+            </Switch>
+          </div>
         </div>
       </Router>
     );

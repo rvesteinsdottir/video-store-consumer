@@ -22,6 +22,9 @@ class MovieSearch extends Component {
 
     if (this.state.title) {
       const params = {query: this.state.title}
+
+      console.log(this.props.url)
+      
       axios.get(`${this.props.url}/movies`, { params })
       .then((response) => {
         console.log('movie results received')
