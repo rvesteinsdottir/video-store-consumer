@@ -58,11 +58,31 @@ class App extends Component {
     });
   }
 
+  addMovie = (movieToAdd) => {
+    console.log(movieToAdd)
+    if (!this.state.movies.find(movie => movie.external_id === movieToAdd.external_id)) {
+      console.log('adding movie to the DB')
+      axios.post(`${BASE_URL}/movies`, movieToAdd)
+      .then((response) => {
+        console.log(response.data);
+        const { movies } = this.state;
+        movies.push(movieToAdd)
+        this.setState({
+          movies,
+        });
+      })
+      .catch((error) => {
+        this.setState({ error: error.message });
+      });
+    }
+  }
+
   selectMovie = (movieId) => {
+    console.log(movieId)
     const { movies } = this.state;
 
     const selectedMovie = movies.find((movie) => {
-      return movie.id === movieId;
+      return movie.external_id === movieId;
     })
     
     this.setState({ selectedMovie, })
@@ -105,6 +125,14 @@ class App extends Component {
     }
   }
 
+  selectedItemClass() {
+    if (this.state.selectedCustomer || this.state.selectedMovie) {
+      return "items-selected"
+    } else {
+      return "no-items-selected"
+    }
+  }
+
   render() {
     return (
       <Router>
@@ -124,11 +152,12 @@ class App extends Component {
                 <Link to="/library">Library</Link>
               </li>
             </ul>
-            <div className="selected-item">
+            <div className={this.selectedItemClass()}>
               {this.state.selectedMovie ? ("Selected Movie: \n" + this.state.selectedMovie.title) : "" }
               <br />
               {this.state.selectedCustomer ? ("Selected Customer: \n" + this.state.selectedCustomer.name) : "" }
-              {(this.state.selectedMovie && this.state.selectedCustomer) ? <Button onClick={() => this.createRental()}>Create a Rental</Button> : ''}
+              <br />
+              {(this.state.selectedMovie && this.state.selectedCustomer )? <Button onClick={() => this.createRental()}>Create a Rental</Button> : ''}
             </div>
           </div>
           
@@ -141,7 +170,7 @@ class App extends Component {
                 <CustomerList customerList={this.state.customers} selectCustomer={(id) => this.selectCustomer(id)} />
               </Route>
               <Route path="/search">
-                <MovieSearch  />
+                <MovieSearch url={BASE_URL} selectMovie={(movie) => this.addMovie(movie)} />
               </Route>
               <Route path="/library">
                 <MovieLib movieList={this.state.movies} selectMovie={(id) => this.selectMovie(id)} />
