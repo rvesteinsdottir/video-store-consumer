@@ -57,19 +57,31 @@ class App extends Component {
     });
   }
 
-  addMovie = (externalId) => {
-    if (!this.state.movies.find(movie => movie.external_id === externalId)) {
+  addMovie = (movieToAdd) => {
+    console.log(movieToAdd)
+    if (!this.state.movies.find(movie => movie.external_id === movieToAdd.external_id)) {
       console.log('adding movie to the DB')
-      params 
-      axios.post()
+      axios.post(`${BASE_URL}/movies`, movieToAdd)
+      .then((response) => {
+        console.log(response.data);
+        const { movies } = this.state;
+        movies.push(movieToAdd)
+        this.setState({
+          movies,
+        });
+      })
+      .catch((error) => {
+        this.setState({ error: error.message });
+      });
     }
   }
 
   selectMovie = (movieId) => {
+    console.log(movieId)
     const { movies } = this.state;
 
     const selectedMovie = movies.find((movie) => {
-      return movie.id === movieId;
+      return movie.external_id === movieId;
     })
     
     this.setState({ selectedMovie, })
@@ -146,7 +158,7 @@ class App extends Component {
               <CustomerList customerList={this.state.customers} selectCustomer={(id) => this.selectCustomer(id)} />
             </Route>
             <Route path="/search">
-              <MovieSearch url={BASE_URL} selectMovie={(externalId) => this.addMovie(externalId)}  />
+              <MovieSearch url={BASE_URL} selectMovie={(movie) => this.addMovie(movie)}  />
             </Route>
             <Route path="/library">
               <MovieLib movieList={this.state.movies} selectMovie={(externalId) => this.selectMovie(externalId)} />

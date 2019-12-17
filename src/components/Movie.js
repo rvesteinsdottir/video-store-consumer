@@ -10,7 +10,7 @@ const Movie = (props) => {
       <p>{props.overview}</p>
       <p>{props.release_date}</p>
       <img src={props.image_url} />
-      <button onClick={() => props.selectMovie(props.externalId)}>{props.inLibrary ? 'Select This Movie!' : 'Add to the Database'}</button>
+      <button onClick={props.selectMovie}>{props.inLibrary ? 'Select This Movie!' : 'Add to the Database'}</button>
     </div>
   )
 }
