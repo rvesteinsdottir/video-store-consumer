@@ -1,19 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from 'react-bootstrap/Button';
-
+import { Card, Button, CardBody } from 'react-bootstrap/';
+import './Movie.css';
 
 const Movie = (props) => {
 
   return (
-    <div>
-      <h4>{props.title}</h4>
-      <p>{props.id}</p>
-      <p>{props.overview}</p>
-      <p>{props.release_date}</p>
-      <img src={props.image_url} />
-      <Button onClick={() => props.selectMovie(props.id)}>Select This Movie!</Button>
-    </div>
+    <Card className="movie-card">
+      <div >
+
+        <div className="movie-card-body">
+          <img src={props.image_url} className="movie-card-image"/>
+          <div className="movie-card-title">  
+            {props.title}
+          </div>
+          <div className="movie-card-release-date">{props.release_date}</div>
+          <div className="movie-card-description">
+            {props.overview}
+            
+          </div>
+          <div className="movie-card-button" >
+            <Button onClick={() => props.selectMovie(props.id)}>Select This Movie!</Button>
+          </div>
+
+        </div>
+      </div>
+    </Card>
   )
 }
 
