@@ -42,7 +42,13 @@
   padding: 20px 10px;
 }
 
-.selected-item {
-  background-color: rgb(226, 177, 86);
+.items-selected {
+  background-color: rgb(58, 173, 154);
+  color: rgb(56, 53, 53);
   padding: 20px;
+  text-align: left;
+}
+
+.span{
+  font-weight: bold;
 }
