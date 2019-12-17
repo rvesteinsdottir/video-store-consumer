@@ -77,26 +77,29 @@ class App extends Component {
     })
   }
 
-  createRental(dueDate) {
+  createRental() {
     if(this.state.selectedMovie) {
       const movieTitle = this.state.selectedMovie.title
       const customerId = this.state.selectedCustomer.id
+      let dueDate = new Date()
+      dueDate.setDate(new Date().getDate() + 1);
 
       const params = {
         customer_id: customerId,
-        due_date: "2019-12-29T14:54:14.000Z", 
+        due_date: dueDate.toISOString(), 
       }
 
       axios.post(`${BASE_URL}/rentals/${movieTitle}/check-out`, params)
-      .then((response) => {
+      .then(() => {
 
-        console.log(response.data)
-
+        this.setState({
+          selectedMovie: undefined,
+          selectedCustomer: undefined,
+          error: undefined,
+        })
       })
       .catch((error) => {
-
         this.setState({ error: error.message });
-
       });
     }
   }
@@ -126,8 +129,7 @@ class App extends Component {
             </ul>
           </nav>
           
-          
-        
+
           <Switch>
             <Route exact path="/">
               <Home />
