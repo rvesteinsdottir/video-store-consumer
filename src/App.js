@@ -125,6 +125,14 @@ class App extends Component {
     }
   }
 
+  selectedItemClass() {
+    if (this.state.selectedCustomer || this.state.selectedMovie) {
+      return "items-selected"
+    } else {
+      return "no-items-selected"
+    }
+  }
+
   render() {
     return (
       <Router>
@@ -144,10 +152,11 @@ class App extends Component {
                 <Link to="/library">Library</Link>
               </li>
             </ul>
-            <div className="selected-item">
+            <div className={this.selectedItemClass()}>
               {this.state.selectedMovie ? ("Selected Movie: \n" + this.state.selectedMovie.title) : "" }
               <br />
               {this.state.selectedCustomer ? ("Selected Customer: \n" + this.state.selectedCustomer.name) : "" }
+              <br />
               {this.state.selectedMovie ? <Button onClick={() => this.createRental()}>Create a Rental</Button> : ''}
             </div>
           </div>
