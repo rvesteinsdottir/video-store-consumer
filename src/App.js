@@ -57,6 +57,14 @@ class App extends Component {
     });
   }
 
+  addMovie = (externalId) => {
+    if (!this.state.movies.find(movie => movie.external_id === externalId)) {
+      console.log('adding movie to the DB')
+      params 
+      axios.post()
+    }
+  }
+
   selectMovie = (movieId) => {
     const { movies } = this.state;
 
@@ -99,10 +107,7 @@ class App extends Component {
               </li>
             </ul>
           </nav>
-          
-          
-         
-        
+
         
           <Switch>
             <Route exact path="/">
@@ -112,10 +117,10 @@ class App extends Component {
               <CustomerList customerList={this.state.customers} selectCustomer={(id) => this.selectCustomer(id)} />
             </Route>
             <Route path="/search">
-              <MovieSearch url={BASE_URL}  />
+              <MovieSearch url={BASE_URL} selectMovie={(externalId) => this.addMovie(externalId)}  />
             </Route>
             <Route path="/library">
-              <MovieLib movieList={this.state.movies} selectMovie={(id) => this.selectMovie(id)} />
+              <MovieLib movieList={this.state.movies} selectMovie={(externalId) => this.selectMovie(externalId)} />
             </Route>
           </Switch>
         </div>

@@ -8,7 +8,7 @@ const MovieLib = (props) => {
     return <Movie
       key={i}
       { ...movie }
-      selectMovie={(id) => props.selectMovie(id)}
+      selectMovie={(externalId) => props.selectMovie(externalId)}
       inLibrary="true"
       />
   });
