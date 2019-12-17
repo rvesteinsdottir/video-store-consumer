@@ -161,7 +161,7 @@ class App extends Component {
                 <CustomerList customerList={this.state.customers} selectCustomer={(id) => this.selectCustomer(id)} />
               </Route>
               <Route path="/search">
-                <MovieSearch  />
+                <MovieSearch url={BASE_URL} selectMovie={(movie) => this.addMovie(movie)} />
               </Route>
               <Route path="/library">
                 <MovieLib movieList={this.state.movies} selectMovie={(id) => this.selectMovie(id)} />
