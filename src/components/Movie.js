@@ -8,12 +8,14 @@ const Movie = (props) => {
   const isDetailed = (props.detailsMovie && (props.detailsMovie.external_id === props.external_id));
 
   const fakeReviews = () => {
+    const raisahShows = ['the Crown', 'Gourmet Makes', 'The Great British Bakeoff', 'The Office']
+    
     return (
       <div>
         <div>"...A triumph."</div>
         <div>-New York Times</div>
         <br />
-        <div>"Even better than the Crown."</div>
+        <div>"Even better than {raisahShows[Math.floor(Math.random() * raisahShows.length)]}."</div>
         <div>-Raisah</div>
       </div>
       );

@@ -1,5 +1,6 @@
 .movie-card {
   margin: 10px;
+  margin-left: 20px;
   width: 670px;
   cursor: pointer;
 }
@@ -8,6 +9,8 @@
   margin: 10px;
   width: 250px;
   cursor: pointer;
+  padding-left: 20px;
+  margin-left: 20px;
 }
 
 .movie-card-body { 
@@ -18,8 +21,8 @@
 }
 
 .movie-card-body__brief {
-  display: grid;
-  grid-template-rows: auto auto auto auto;
+  /* display: grid;
+  grid-template-rows: auto auto auto auto; */
   justify-items: center;
 }
 
@@ -61,9 +64,6 @@
 }
 
 .movie-card-button__brief {
-  grid-row-start: 4;
-  width: 200px;
-  text-align: center;
   padding-bottom: 5px;
 }
 
