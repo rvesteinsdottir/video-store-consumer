@@ -24,7 +24,7 @@ const Movie = (props) => {
             {isDetailed ? props.overview : ""}
           </div>
 
-          <div className="movie-card-button" >
+          <div className={ isDetailed ? "movie-card-button" : "movie-card-button__brief" } >
             <Button 
               onClick={() => props.selectMovie(props.id)}>{props.inLibrary ? "Select" : "Add to Rental Library"}
             </Button>
@@ -41,6 +41,7 @@ Movie.propTypes = {
   overview: PropTypes.string.isRequired,
   image_url: PropTypes.string,
   id: PropTypes.number,
+  selectMovie: PropTypes.func,
 }
 
 export default Movie;
