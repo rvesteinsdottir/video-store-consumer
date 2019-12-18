@@ -61,6 +61,8 @@ class MovieSearch extends Component {
       key={i}
       { ...movie }
       selectMovie={() => this.props.selectMovie(movie)}
+      detailsCallback={() => this.props.detailsCallback(movie.external_id) }
+      detailsMovie={ this.props.detailsMovie}
       />
   });
   
@@ -69,22 +71,24 @@ class MovieSearch extends Component {
       <div>
         <h3>Movie Search</h3>
         <form onSubmit={this.onSubmitHandler}>
-        <div>
-          <label htmlFor="title">Title:</label>
-          <input
-            name="title"
-            id="title"
-            onChange={this.onInputChange}
-            value={this.state.title}
-          />
-        </div>
+          <div>
+            <label htmlFor="title">Title:</label>
+            <input
+              name="title"
+              id="title"
+              onChange={this.onInputChange}
+              value={this.state.title}
+            />
+          </div>
         <input
           type="submit"
           name="submit"
           onClick={this.onSubmitHandler}
         />
-    </form>
-        {this.state.searchResults ? this.databaseMovies() : ""}
+        </form>
+        <div className="row">
+          {this.state.searchResults ? this.databaseMovies() : ""}
+        </div>
       </div>
     )
   }
