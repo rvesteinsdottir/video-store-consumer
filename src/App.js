@@ -137,11 +137,8 @@ class App extends Component {
   }
 
   selectedItemClass() {
-    if (this.state.selectedCustomer || this.state.selectedMovie) {
-      return "items-selected"
-    } else {
-      return "no-items-selected"
-    }
+
+    return ((this.state.selectedCustomer || this.state.selectedMovie) ? "items-selected" : "no-items-selected" )
   }
 
   render() {

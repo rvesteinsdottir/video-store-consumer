@@ -14,10 +14,11 @@ const Movie = (props) => {
           <div className="movie-card-title">  
             {props.title}
           </div>
-          <div className="movie-card-release-date">{props.release_date}</div>
+          <div className="movie-card-release-date">   
+            {props.release_date}
+          </div>
           <div className="movie-card-description">
-            {props.overview}
-            
+            {props.overview} 
           </div>
           <div className="movie-card-button" >
             <Button onClick={() => props.selectMovie(props.id)}>{props.inLibrary ? "Select" : "Add to Rental Library"}</Button>
@@ -35,6 +36,7 @@ Movie.propTypes = {
   overview: PropTypes.string.isRequired,
   image_url: PropTypes.string,
   id: PropTypes.number,
+  selectMovie: PropTypes.func,
 }
 
 export default Movie;
