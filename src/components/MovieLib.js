@@ -18,7 +18,9 @@ const MovieLib = (props) => {
   return (
     <div>
       <h3>Movie Library</h3>
-      {makeMovies()}
+      <div className="row">
+        {makeMovies()}
+      </div>
     </div>
   )
 }

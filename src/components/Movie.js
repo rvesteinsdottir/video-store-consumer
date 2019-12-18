@@ -8,7 +8,7 @@ const Movie = (props) => {
   const isDetailed = (props.detailsMovie && (props.detailsMovie.external_id === props.external_id));
 
   return (
-    <Card className={ isDetailed ? "movie-card" : "movie-card__brief" } >
+    <Card className={ isDetailed ? "movie-card" : "movie-card__brief col-sm-3" } >
       <div onClick={ () => props.detailsCallback(props.id) }>
 
         <div className={ isDetailed ? "movie-card-body" : "movie-card-body__brief" }>
