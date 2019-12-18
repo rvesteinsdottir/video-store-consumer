@@ -10,6 +10,8 @@ const MovieLib = (props) => {
       { ...movie }
       selectMovie={() => props.selectMovie(movie.external_id)}
       inLibrary="true"
+      detailsCallback={() => props.detailsCallback(movie.external_id) }
+      detailsMovie={props.detailsMovie}
       />
   });
   
@@ -24,6 +26,8 @@ const MovieLib = (props) => {
 MovieLib.propTypes = {
   movieList: PropTypes.array.isRequired,
   selectMovie: PropTypes.func.isRequired,
+  detailsCallback: PropTypes.func.isRequired,
+  detailsMovie: PropTypes.object,
 }
 
 export default MovieLib;
