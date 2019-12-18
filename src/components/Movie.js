@@ -5,25 +5,38 @@ import './Movie.css';
 
 const Movie = (props) => {
 
-  return (
-    <Card className="movie-card">
-      <div >
+  const isDetailed = (props.detailsMovie && (props.detailsMovie.external_id === props.external_id));
 
-        <div className="movie-card-body">
+  return (
+    <Card className={ isDetailed ? "movie-card" : "movie-card__brief col-sm-3" } >
+      <div onClick={ () => props.detailsCallback(props.id) }>
+
+        <div className={ isDetailed ? "movie-card-body" : "movie-card-body__brief" }>
           <img src={props.image_url} className="movie-card-image" alt="movie cover"/>
+          
           <div className="movie-card-title">  
             {props.title}
           </div>
+<<<<<<< HEAD
           <div className="movie-card-release-date">   
             {props.release_date}
           </div>
           <div className="movie-card-description">
             {props.overview} 
-          </div>
-          <div className="movie-card-button" >
-            <Button onClick={() => props.selectMovie(props.id)}>{props.inLibrary ? "Select" : "Add to Rental Library"}</Button>
+=======
+          
+          <div className="movie-card-release-date">{props.release_date}</div>
+          
+          <div className="movie-card-description">
+            {isDetailed ? props.overview : ""}
+>>>>>>> a4a3805365f398d322fd0ae9325fce4b8ef7e0c9
           </div>
 
+          <div className="movie-card-button" >
+            <Button 
+              onClick={() => props.selectMovie(props.id)}>{props.inLibrary ? "Select" : "Add to Rental Library"}
+            </Button>
+          </div>
         </div>
       </div>
     </Card>

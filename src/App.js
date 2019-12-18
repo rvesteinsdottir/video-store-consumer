@@ -28,6 +28,7 @@ class App extends Component {
       error: undefined,
       alertText: undefined,
       alertVariant: undefined,
+      detailsMovie: undefined,
     };
   } 
 
@@ -136,6 +137,17 @@ class App extends Component {
     }
   }
 
+  detailsCallback(movieId) {
+    const { movies } = this.state;
+
+    const detailsMovie = movies.find((movie) => {
+      return movie.external_id === movieId;
+    })
+    
+    this.setState({ detailsMovie, })
+  }
+  
+
   selectedItemClass() {
 
     return ((this.state.selectedCustomer || this.state.selectedMovie) ? "items-selected" : "no-items-selected" )
@@ -195,7 +207,7 @@ class App extends Component {
                 <MovieSearch url={BASE_URL} selectMovie={(movie) => this.addMovie(movie)} />
               </Route>
               <Route path="/library">
-                <MovieLib movieList={this.state.movies} selectMovie={(id) => this.selectMovie(id)} />
+                <MovieLib movieList={this.state.movies} selectMovie={(id) => this.selectMovie(id)} detailsCallback={(id) => this.detailsCallback(id)} detailsMovie={this.state.detailsMovie} />
               </Route>
             </Switch>
           </div>
