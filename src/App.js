@@ -138,13 +138,20 @@ class App extends Component {
   }
 
   detailsCallback(movieId) {
+    console.log(movieId)
+    
     const { movies } = this.state;
 
-    const detailsMovie = movies.find((movie) => {
-      return movie.external_id === movieId;
-    })
-    
-    this.setState({ detailsMovie, })
+    if (this.state.detailsMovie && this.state.detailsMovie.external_id === movieId) {
+      this.setState({ detailsMovie: undefined })
+    } else {
+
+      const detailsMovie = movies.find((movie) => {
+        return movie.external_id === movieId;
+      })
+
+      this.setState({ detailsMovie, })
+    }
   }
   
 

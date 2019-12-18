@@ -1,6 +1,6 @@
 .movie-card {
   margin: 10px;
-  width: 1fr;
+  width: 670px;
   cursor: pointer;
 }
 
@@ -41,6 +41,7 @@
 .movie-card-title {
   grid-row-start: 2;
   grid-column-start: 1;
+  font-weight: bold;
 }
 
 .movie-card-description {
@@ -56,10 +57,16 @@
   grid-column-start: 2;
   width: 200px;
   text-align: center;
+  padding-bottom: 5px;
 }
 
 .movie-card-button__brief {
   grid-row-start: 4;
   width: 200px;
+  text-align: center;
+  padding-bottom: 5px;
+}
+
+.movie-quotes {
   text-align: center;
 }
