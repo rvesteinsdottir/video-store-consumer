@@ -24,7 +24,7 @@ const Movie = (props) => {
             {isDetailed ? props.overview : ""}
           </div>
 
-          <div className="movie-card-button" >
+          <div className={ isDetailed ? "movie-card-button" : "movie-card-button__brief" } >
             <Button 
               onClick={() => props.selectMovie(props.id)}>{props.inLibrary ? "Select" : "Add to Rental Library"}
             </Button>
