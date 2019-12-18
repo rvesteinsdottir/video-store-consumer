@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Movie from './Movie'
 import axios from 'axios';
+import './MovieSearch.css'
 
 class MovieSearch extends Component {
   constructor() {
@@ -72,7 +73,6 @@ class MovieSearch extends Component {
         <h3>Movie Search</h3>
         <form onSubmit={this.onSubmitHandler}>
           <div>
-            <label htmlFor="title">Title:</label>
             <input
               name="title"
               id="title"
@@ -83,6 +83,7 @@ class MovieSearch extends Component {
         <input
           type="submit"
           name="submit"
+          className="submit-button"
           onClick={this.onSubmitHandler}
         />
         </form>
