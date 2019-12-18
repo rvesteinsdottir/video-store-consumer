@@ -6,6 +6,8 @@ const Home = () => {
   return (
     <div className="home">
       <h3>Home</h3>
+      <div className="landing-photo">
+      </div>
     </div>
   )
 }

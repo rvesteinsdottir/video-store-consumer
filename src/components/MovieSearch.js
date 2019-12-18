@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Movie from './Movie'
 import axios from 'axios';
 import './MovieSearch.css'
+import reels from '../reels.jpeg'
 
 class MovieSearch extends Component {
   constructor() {
@@ -66,6 +67,12 @@ class MovieSearch extends Component {
       detailsMovie={ this.props.detailsMovie}
       />
   });
+
+  reels = () => {
+    return(
+      <img src={reels} />
+    ) 
+  }
   
   render () {
     return (
@@ -88,7 +95,7 @@ class MovieSearch extends Component {
         />
         </form>
         <div className="row">
-          {this.state.searchResults ? this.databaseMovies() : ""}
+          {this.state.searchResults ? this.databaseMovies() : this.reels()}
         </div>
       </div>
     )

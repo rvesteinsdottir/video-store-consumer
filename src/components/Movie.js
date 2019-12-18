@@ -9,13 +9,15 @@ const Movie = (props) => {
 
   const fakeReviews = () => {
     const raisahShows = ['the Crown', 'Gourmet Makes', 'The Great British Bakeoff', 'The Office']
+
+    const raisahThoughts = ['Even better than', 'Cannot compare to', 'Almost on par with']
     
     return (
       <div>
         <div>"...A triumph."</div>
         <div>-New York Times</div>
         <br />
-        <div>"Even better than {raisahShows[Math.floor(Math.random() * raisahShows.length)]}."</div>
+        <div>"{raisahThoughts[Math.floor(Math.random() * raisahThoughts.length)]} {raisahShows[Math.floor(Math.random() * raisahShows.length)]}."</div>
         <div>-Raisah</div>
       </div>
       );
