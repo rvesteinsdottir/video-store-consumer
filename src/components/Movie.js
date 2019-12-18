@@ -17,19 +17,11 @@ const Movie = (props) => {
           <div className="movie-card-title">  
             {props.title}
           </div>
-<<<<<<< HEAD
-          <div className="movie-card-release-date">   
-            {props.release_date}
-          </div>
-          <div className="movie-card-description">
-            {props.overview} 
-=======
           
           <div className="movie-card-release-date">{props.release_date}</div>
           
           <div className="movie-card-description">
             {isDetailed ? props.overview : ""}
->>>>>>> a4a3805365f398d322fd0ae9325fce4b8ef7e0c9
           </div>
 
           <div className="movie-card-button" >
