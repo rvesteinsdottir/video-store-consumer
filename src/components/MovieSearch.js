@@ -12,6 +12,7 @@ class MovieSearch extends Component {
       title: '',
       searchResults: [],
       error: undefined,
+      searchDetailsMovie: undefined
     }
   }
 
@@ -38,6 +39,23 @@ class MovieSearch extends Component {
     }
   }
 
+  showDetails = (movieId) => {
+    console.log(`inshowDetails, id ${movieId}`)
+    const { searchDetailsMovie } = this.state;
+
+    if (this.state.searchDetailsMovie && this.state.searchDetailsMovie.external_id === movieId) {
+      this.setState({ searchDetailsMovie: undefined })
+    } else {
+
+      const searchDetailsMovie = this.state.searchResults.find((movie) => {
+        return movie.external_id === movieId;
+      })
+
+      this.setState({ searchDetailsMovie, })
+    }
+  }
+
+
   searchForm = () => {
     return(
     <form onSubmit={this.onSubmitHandler}>
@@ -63,8 +81,8 @@ class MovieSearch extends Component {
       key={i}
       { ...movie }
       selectMovie={() => this.props.selectMovie(movie)}
-      detailsCallback={() => this.props.detailsCallback(movie.external_id) }
-      detailsMovie={ this.props.detailsMovie}
+      detailsCallback={(external_id) => this.showDetails(movie.external_id) }
+      searchDetailsMovie={this.state.searchDetailsMovie}
       />
   });
 
