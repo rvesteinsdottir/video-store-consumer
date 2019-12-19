@@ -5,7 +5,7 @@ import './Movie.css';
 
 const Movie = (props) => {
 
-  const isDetailed = (props.detailsMovie && (props.detailsMovie.external_id === props.external_id));
+  const isDetailed = (props.detailsMovie && (props.detailsMovie.external_id === props.external_id)) || ((props.searchDetailsMovie && (props.searchDetailsMovie.external_id === props.external_id)));
 
   const fakeReviews = () => {
     const raisahThoughts = ['Even better than', 'Cannot compare to', 'Almost on par with', 'Kinda reminds me of', 'Not as good as']
