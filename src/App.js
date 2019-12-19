@@ -35,18 +35,14 @@ class App extends Component {
   componentDidMount() {
     axios.get(`${BASE_URL}/customers`)
     .then((response) => {
-
       const customers = response.data;
-
       this.setState({ 
         customers,
         error: undefined
       });
     })
     .catch((error) => {
-      this.setState({
-        error: error.message 
-      });
+      this.setState({ error: error.message });
     });
 
     axios.get(`${BASE_URL}/movies`)
@@ -64,7 +60,6 @@ class App extends Component {
 
   addMovie = (movieToAdd) => {
     if (!this.state.movies.find(movie => movie.external_id === movieToAdd.external_id)) {
-      console.log('adding movie to the DB')
       axios.post(`${BASE_URL}/movies`, movieToAdd)
       .then((response) => {
         const { movies } = this.state;
@@ -82,33 +77,38 @@ class App extends Component {
           alertVariant: "danger" 
         });
       });
-    } else { this.setState({alertText: "Movie already exists in library", alertVariant: "danger"})}
+    } else { 
+      this.setState({
+        alertText: "Movie already exists in library", 
+        alertVariant: "danger"
+      })
+    }
   }
 
   selectMovie = (movieId) => {
     const { movies } = this.state;
-
     const selectedMovie = movies.find((movie) => {
       return movie.external_id === movieId;
     })
     
-    this.setState({ selectedMovie, })
+    this.setState({  selectedMovie })
   }
 
-  selectCustomer(id) {
+  selectCustomer(customerId) {
     const { customers } = this.state;
-
-    const selectedCustomer = customers[id - 1]
-
-    this.setState({
-      selectedCustomer,
+    const selectedCustomer = customers.find((customer) => {
+      return customer.id === customerId;
     })
+
+    this.setState({ selectedCustomer })
   }
 
   createRental() {
     if(this.state.selectedMovie) {
       const movieTitle = this.state.selectedMovie.title
       const customerId = this.state.selectedCustomer.id
+
+      // Sets due date to the day after rental is created
       let dueDate = new Date()
       dueDate.setDate(new Date().getDate() + 1);
 
@@ -137,26 +137,21 @@ class App extends Component {
     }
   }
 
-  detailsCallback(movieId) {
-    console.log(movieId)
-    
-    const { movies } = this.state;
+  detailsCallback(movieId) {    
+    const { movies, detailsMovie } = this.state;
 
-    if (this.state.detailsMovie && this.state.detailsMovie.external_id === movieId) {
+    if (detailsMovie && detailsMovie.external_id === movieId) {
       this.setState({ detailsMovie: undefined })
     } else {
-
       const detailsMovie = movies.find((movie) => {
         return movie.external_id === movieId;
       })
 
-      this.setState({ detailsMovie, })
+      this.setState({ detailsMovie })
     }
   }
   
-
   selectedItemClass() {
-
     return ((this.state.selectedCustomer || this.state.selectedMovie) ? "items-selected" : "no-items-selected" )
   }
 
@@ -178,6 +173,7 @@ class App extends Component {
       <Router>
         <div className="App">
           <div className="sidenav">
+
             <ul>
               <li>
                 <Link to="/">Home</Link>
@@ -192,6 +188,7 @@ class App extends Component {
                 <Link to="/library">Library</Link>
               </li>
             </ul>
+
             <div className={this.selectedItemClass()}>
               {this.state.selectedMovie ? ("Selected Movie: \n" + this.state.selectedMovie.title) : "" }
               <br />
@@ -199,10 +196,13 @@ class App extends Component {
               <br />
               {(this.state.selectedMovie && this.state.selectedCustomer )? <Button onClick={() => this.createRental()}>Create a Rental</Button> : ''}
             </div>
+
           </div>
           
           <div className="main">
+
             {this.state.alertText ? videoAlert() : "" }
+
             <Switch>
               <Route exact path="/">
                 <Home />
@@ -217,6 +217,7 @@ class App extends Component {
                 <MovieLib movieList={this.state.movies} selectMovie={(id) => this.selectMovie(id)} detailsCallback={(id) => this.detailsCallback(id)} detailsMovie={this.state.detailsMovie} />
               </Route>
             </Switch>
+            
           </div>
         </div>
       </Router>
