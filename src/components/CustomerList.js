@@ -18,7 +18,7 @@ const CustomerList = ({ customerList, selectCustomer }) => {
   return (
     <div>
       <h3>Customer List</h3>
-      { buildCustomers() }
+      {buildCustomers()}
     </div>
   )
 }
