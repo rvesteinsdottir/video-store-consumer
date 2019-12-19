@@ -8,7 +8,7 @@ const Customer = ({ id, name, address, city, state, postalCode, registered_at, p
     <Card className="customer-card-container">
       <div className="customer-card">
         <div className="customer-name">
-          <h3>{name}</h3>
+          <h3>{ name }</h3>
           <ul>
             <li>Account Credit: {account_credit} </li>
             <li>Movies Checked Out: {movies_checked_out_count} </li>

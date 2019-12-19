@@ -8,9 +8,9 @@ const Movie = (props) => {
   const isDetailed = (props.detailsMovie && (props.detailsMovie.external_id === props.external_id));
 
   const fakeReviews = () => {
+    const raisahThoughts = ['Even better than', 'Cannot compare to', 'Almost on par with', 'Kinda reminds me of', 'Not as good as']
+    
     const raisahShows = ['the Crown', 'Gourmet Makes', 'The Great British Bakeoff', 'The Office']
-
-    const raisahThoughts = ['Even better than', 'Cannot compare to', 'Almost on par with']
     
     return (
       <div>
@@ -24,7 +24,7 @@ const Movie = (props) => {
   }
 
   return (
-    <Card className={ isDetailed ? "movie-card" : "movie-card__brief col-sm-3" } >
+    <Card className={ isDetailed ? "movie-card" : "col-sm-3 movie-card__brief" } >
       <div onClick={ () => props.detailsCallback(props.id) }>
 
         <div className={ isDetailed ? "movie-card-body" : "movie-card-body__brief" }>
