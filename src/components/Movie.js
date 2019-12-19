@@ -38,7 +38,7 @@ const Movie = ({ title, release_date, overview, image_url, id, selectMovie, deta
           
           <div className="movie-card-description">
             <p>{isDetailed ? overview : ""}</p>
-            <p className="movie-quotes">{isDetailed ? fakeReviews() : ""}</p>
+            <div className="movie-quotes">{isDetailed ? fakeReviews() : ""}</div>
           </div>
 
           <div className={ isDetailed ? "movie-card-button" : "movie-card-button__brief" } >

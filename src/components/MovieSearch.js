@@ -17,41 +17,39 @@ class MovieSearch extends Component {
   }
 
   onInputChange = (event) => {
-    this.setState({title: event.target.value});
+    this.setState({ title: event.target.value });
   }
 
   onSubmitHandler = (event) => {
     event.preventDefault();
+    const { title } = this.state
 
-    if (this.state.title) {
-      const params = {query: this.state.title}      
+    if (title) {
+      const params = {query: title}      
       axios.get(`${this.props.url}/movies`, { params })
       .then((response) => {
-        console.log('movie results received')
         this.setState({
           searchResults: response.data,
         });
       })
       .catch((error) => {
-        console.log(error.message);
-        this.setState({error: error.message});
+        this.setState({ error: error.message });
       });
     }
   }
 
   showDetails = (movieId) => {
-    console.log(`inshowDetails, id ${movieId}`)
-    const { searchDetailsMovie } = this.state;
+    const { searchDetailsMovie, searchResults } = this.state;
 
-    if (this.state.searchDetailsMovie && this.state.searchDetailsMovie.external_id === movieId) {
+    if (searchDetailsMovie && searchDetailsMovie.external_id === movieId) {
       this.setState({ searchDetailsMovie: undefined })
     } else {
 
-      const searchDetailsMovie = this.state.searchResults.find((movie) => {
+      const searchDetailsMovie = searchResults.find((movie) => {
         return movie.external_id === movieId;
       })
 
-      this.setState({ searchDetailsMovie, })
+      this.setState({ searchDetailsMovie })
     }
   }
 
@@ -81,7 +79,7 @@ class MovieSearch extends Component {
       key={i}
       { ...movie }
       selectMovie={() => this.props.selectMovie(movie)}
-      detailsCallback={(external_id) => this.showDetails(movie.external_id) }
+      detailsCallback={() => this.showDetails(movie.external_id) }
       searchDetailsMovie={this.state.searchDetailsMovie}
       />
   });

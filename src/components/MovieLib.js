@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import Movie from './Movie'
 import './MovieLib.css'
 
-const MovieLib = (props) => {
+const MovieLib = ({ movieList, selectMovie, detailsCallback, detailsMovie }) => {
   
-  const makeMovies = () => props.movieList.map((movie, i) => {
+  const makeMovies = () => movieList.map((movie, i) => {
     return <Movie
       key={i}
       { ...movie }
-      selectMovie={() => props.selectMovie(movie.external_id)}
+      selectMovie={() => selectMovie(movie.external_id)}
       inLibrary="true"
-      detailsCallback={() => props.detailsCallback(movie.external_id) }
-      detailsMovie={props.detailsMovie}
+      detailsCallback={() => detailsCallback(movie.external_id) }
+      detailsMovie={detailsMovie}
       />
   });
   
